@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:prof/constant.dart';
 import 'package:prof/models/Product.dart';
+import 'package:prof/screens/details/components/product_title_with_image.dart';
+
+import '../../../constant.dart';
+import 'add_card.dart';
+import 'color_and_size.dart';
+import 'description.dart';
+import 'fav_button.dart';
 
 class Body extends StatelessWidget {
   final Product product;
@@ -19,50 +25,26 @@ class Body extends StatelessWidget {
             children: <Widget>[
               Container(
                 margin: EdgeInsets.only(top: size.height * 0.3),
+                padding: EdgeInsets.only(
+                    top: size.height * 0.12,
+                    left: kDefaultPadding,
+                    right: kDefaultPadding),
                 height: 500,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(24),
                         topRight: Radius.circular(24))),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
                 child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text('sdgsdfhhdh',
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                      Text(
-                        "product.title",
-                        style: Theme.of(context).textTheme.headline4.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      Row(children: <Widget>[
-                        RichText(
-                          text: TextSpan(children: [
-                            TextSpan(text: 'Erdem'),
-                            TextSpan(
-                                text: 'Büşra',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline4
-                                    .copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold))
-                          ]),
-                        ),
-                        SizedBox(width: kDefaultPadding),
-                        Expanded(
-                            child: Image.network(products[0].image,
-                                fit: BoxFit.fill))
-                      ])
-                    ]),
-              )
+                  children: <Widget>[
+                    ColorAndSize(product: product),
+                    Description(product: product),
+                    FavButton(),
+                    AddtoCard(product: product)
+                  ],
+                ),
+              ),
+              ProductTitleWithImage(product: product)
             ],
           ),
         )
